@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Happy Birthday Moto❤️</title>//Change
+<title>Happy Birthday Moto❤️</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<!-- The CSS below controls the colors, layout, animations, and buttons. -->
 <style>
   :root{
     --pink:#ff3366;
@@ -121,9 +122,11 @@
 </head>
 <body>
 
+<!-- These two layers create the animated background decorations. -->
 <canvas id="confettiCanvas"></canvas>
 <div class="balloons" id="balloons"></div>
 
+<!-- Main birthday message and interactive content. -->
 <div class="wrap">
   <h1 id="titleText">🎂 Happy Birthday, My Love 🎂</h1>
   <p class="subtitle">You make my world brighter, funnier, and full of love Vanshuda 💕</p>
@@ -132,7 +135,7 @@
   <p class="heart-hint">(tap the heart)</p>
   <div class="secret" id="secretMsg">"Every heartbeat of mine has your name on it." 💌</div>
 
-  <!-- QUIZ -->
+  <!-- Birthday quiz: JavaScript adds the questions and answer buttons here. -->
   <div class="quizStage" id="quizStage">
     <div class="progress" id="quizProgress">Question 1 of 3</div>
     <h3 id="quizQuestion">How many times do I love you?</h3>
@@ -140,7 +143,7 @@
     <div class="feedback" id="quizFeedback"></div>
   </div>
 
-  <!-- FINAL / TIMED REVEALS -->
+  <!-- These messages appear one by one after all quiz answers are correct. -->
   <div id="finalArea">
     <div class="revealMsg" id="reveal1">🎉 You got them all right — of course you did, you're brilliant.</div>
     <div class="revealMsg" id="reveal2">🎈 Somewhere between the balloons and the bad jokes, I fell for you even more.</div>
@@ -157,11 +160,12 @@
 <div class="toast" id="toast"></div>
 <footer>Made with ❤️ by Vipul</footer>
 
+<!-- The JavaScript below makes the heart, balloons, quiz, confetti, and letter interactive. -->
 <script>
-/* =============== quick personalization =============== */
+/* Change this name when personalizing the birthday wish. */
 const PARTNER_NAME = "My Love";
 
-/* =============== toast helper (replaces alert()) =============== */
+/* Shows a small message at the bottom of the page. */
 const toastEl = document.getElementById('toast');
 let toastTimer;
 function showToast(msg, duration=2200){
@@ -171,7 +175,7 @@ function showToast(msg, duration=2200){
   toastTimer = setTimeout(()=> toastEl.classList.remove('show'), duration);
 }
 
-/* =============== confetti canvas =============== */
+/* Draws and moves the colorful confetti. */
 const canvas = document.getElementById('confettiCanvas');
 const ctx = canvas.getContext('2d');
 function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
@@ -204,7 +208,7 @@ function loop(){
 }
 spawnConfetti(50); loop();
 
-/* =============== balloons (pop = confetti burst; one hides a secret) =============== */
+/* Creates balloons. Clicking one pops it and shows a small message. */
 const balloonsWrap = document.getElementById('balloons');
 const balloonNotes = [
   "You're the best part of my every day 💕",
@@ -250,7 +254,7 @@ function makeOneBalloon(){
 }
 makeBalloons(10);
 
-/* =============== hidden heart secret =============== */
+/* Clicking the heart shows or hides the secret romantic message. */
 const heartBtn = document.getElementById('heartBtn');
 const secretMsg = document.getElementById('secretMsg');
 let secretShown = false;
@@ -261,7 +265,7 @@ heartBtn.addEventListener('click', ()=>{
   spawnConfetti(25, rect.left+rect.width/2, rect.top+rect.height/2);
 });
 
-/* =============== quiz =============== */
+/* The quiz questions, possible answers, and correct answer numbers. */
 const quiz = [
   {
     q: "You know how many times do I love you?",
@@ -303,6 +307,8 @@ function renderQuestion(){
     quizOptions.appendChild(btn);
   });
 }
+
+/* Checks the selected answer and moves to the next question when correct. */
 function handleAnswer(i){
   const item = quiz[qIndex];
   if(i === item.correct){
@@ -325,7 +331,7 @@ function handleAnswer(i){
 }
 renderQuestion();
 
-/* =============== timed romantic reveal sequence =============== */
+/* Shows the final romantic messages with a short delay between each one. */
 function startFinalReveal(){
   const finalArea = document.getElementById('finalArea');
   finalArea.style.display = 'block';
