@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- CUSTOMIZE: Change the browser tab title. -->
 <title>Happy Birthday, Vanshuda! 🎂❤️</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -118,7 +119,9 @@
 
 <!-- ===== INTRO SPLASH ===== -->
 <div id="intro">
+  <!-- CUSTOMIZE: Change the recipient's name and opening message. -->
   <h1>Uh oh, Vanshuda... it's YOUR day. 🚨🎂</h1>
+  <!-- CUSTOMIZE: Change the rotating introduction messages in introLines below. -->
   <p id="typewriter"></p>
   <button class="btn" onclick="startShow()">Open Your Surprise 🎁</button>
 </div>
@@ -129,6 +132,7 @@
 
   <!-- Slide 0: Greeting -->
   <div class="slide" id="slide0">
+    <!-- CUSTOMIZE: Change the recipient's name, nickname, greeting, and heart hint. -->
     <h1 class="title">🎂 Happy Birthday, Vanshuda 🎂</h1>
     <p class="subtitle">My Moto, my favorite person, my favorite chaos. Today the whole internet celebrates you (well, this one page — but I mean it a lot). 💕</p>
     <div class="heart" id="heartBtn">❤️</div>
@@ -139,6 +143,7 @@
   <!-- Slide 1: Love question -->
   <div class="slide" id="slide1">
     <div class="card">
+      <!-- CUSTOMIZE: Change this question and the messages shown after each answer. -->
       <h2>One very important question 🤔</h2>
       <p>Do you really love me?</p>
       <div class="loveBtnWrap" id="loveBtnWrap">
@@ -153,6 +158,7 @@
   <!-- Slide 2: Quiz -->
   <div class="slide" id="slide2">
     <div class="card">
+      <!-- CUSTOMIZE: Change the quiz questions, answers, and feedback in quiz below. -->
       <h2>Quick Quiz About Us 💭</h2>
       <div class="progress" id="quizProgress">Question 1 of 4</div>
       <h3 id="quizQuestion" style="margin-top:0;"></h3>
@@ -164,6 +170,7 @@
   <!-- Slide 3: Cake -->
   <div class="slide" id="slide3">
     <div class="card">
+      <!-- CUSTOMIZE: Change the cake instructions and wish message in the cake section below. -->
       <h2>Make a Wish 🕯️</h2>
       <div class="cake-wrap" id="cake">🎂<span class="flame" id="flame">🔥</span></div>
       <p id="cakeText" style="font-size:.92rem;color:#7a3b52;">Tap the cake before it blows itself out in 10 seconds.</p>
@@ -173,6 +180,7 @@
   <!-- Slide 4: Fortune -->
   <div class="slide" id="slide4">
     <div class="card">
+      <!-- CUSTOMIZE: Change the birthday fortunes in fortunes below. -->
       <h2>Birthday Fortune, Just For You 🔮</h2>
       <div id="fortune-box">Your fortune will appear here...</div>
       <button class="btn" onclick="tellFortune()" style="margin-top:12px;">Reveal My Fate</button>
@@ -182,6 +190,7 @@
   <!-- Slide 5: Love meter -->
   <div class="slide" id="slide5">
     <div class="card">
+      <!-- CUSTOMIZE: Change the love meter labels in loveLabels below. -->
       <h2>Official Love Meter 💗</h2>
       <div id="love-result">🤔</div>
       <div id="love-label">Click to measure exactly how loved you are today</div>
@@ -192,6 +201,7 @@
   <!-- Slide 6: Compliments -->
   <div class="slide" id="slide6">
     <div class="card">
+      <!-- CUSTOMIZE: Change the compliments in combos below. -->
       <h2>Compliments You Didn't Ask For 🌶️💕</h2>
       <div id="combo-box">Click for a compliment, no take-backs.</div>
       <button class="btn" onclick="nextCombo()" style="margin-top:12px;">Hit Me</button>
@@ -201,6 +211,7 @@
   <!-- Slide 7: Wheel -->
   <div class="slide" id="slide7">
     <div class="card">
+      <!-- CUSTOMIZE: Change the dares in dares below. -->
       <h2>Spin the Wheel of Birthday Dares 🎡</h2>
       <p style="font-size:.92rem;color:#7a3b52;">Fully optional. Mostly adorable.</p>
       <button class="btn" onclick="spinWheel()">Spin It</button>
@@ -211,6 +222,7 @@
   <!-- Slide 8: Reasons -->
   <div class="slide" id="slide8">
     <div class="card">
+      <!-- CUSTOMIZE: Change the reasons in reasons below. -->
       <h2>Reasons You're Stuck With Me, Moto</h2>
       <ul class="reasons" id="reasonsList"></ul>
     </div>
@@ -219,6 +231,7 @@
   <!-- Slide 9: Timed reveals -->
   <div class="slide" id="slide9">
     <div class="card">
+      <!-- CUSTOMIZE: Change the three reveal messages below. -->
       <h2>Wait for it... 💫</h2>
       <div id="reveal1" class="revealMsg">🎉 You got them all right — of course you did, you're brilliant, Vanshuda.</div>
       <div id="reveal2" class="revealMsg">🎈 Somewhere between the balloons and the terrible jokes, I fell for you even more.</div>
@@ -229,6 +242,7 @@
   <!-- Slide 10: Letter -->
   <div class="slide" id="slide10">
     <div class="card">
+      <!-- CUSTOMIZE: Change the letter and signature below. -->
       <h2>Okay, Being Serious for One Second 💌</h2>
       <button class="btn" id="letterBtn">Open My Letter To You</button>
       <div id="letter">Happy birthday, Vanshuda.
@@ -245,6 +259,7 @@ I love you. Go be amazing today (as usual).</div>
   <!-- Slide 11: Finale -->
   <div class="slide" id="slide11">
     <div class="card">
+      <!-- CUSTOMIZE: Change the final birthday message below. -->
       <h2>Grand Finale 🎊</h2>
       <p style="margin-bottom:14px;">Happy Birthday, Vanshuda. That's the whole website. Now go enjoy your day. 💕</p>
       <button class="btn" onclick="launchConfetti(220)">Unleash Confetti 🎊</button>
@@ -264,7 +279,7 @@ I love you. Go be amazing today (as usual).</div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* =============== quick personalization =============== */
+/* CUSTOMIZE: Change the recipient's name and nickname here. */
 const PARTNER_NAME = "Vanshuda";
 const PET_NAME = "Moto";
 
@@ -325,7 +340,7 @@ function spawnEmoji(){
   setTimeout(()=> e.remove(), duration*1000);
 }
 
-/* =============== balloons =============== */
+/* CUSTOMIZE: Change the balloon messages in balloonNotes below. */
 const balloonsWrap = document.getElementById('balloons');
 const balloonNotes = [
   "You're the best part of my every day 💕",
@@ -356,7 +371,7 @@ for(let i=0;i<8;i++){
   balloonsWrap.appendChild(b);
 }
 
-/* =============== intro typewriter =============== */
+/* CUSTOMIZE: Change the rotating introduction messages below. */
 const introLines = [
   "I made you a website, Vanshuda. Yes, a whole website. For a birthday.",
   "Please lower your expectations before proceeding.",
@@ -429,6 +444,7 @@ heartBtn.addEventListener('click', ()=>{
   spawnConfetti(25, rect.left+rect.width/2, rect.top+rect.height/2);
 });
 
+/* CUSTOMIZE: Change the love question, dodge messages, and yes-answer message below. */
 /* =============== "Do you really love me?" — No always dodges =============== */
 const loveWrap = document.getElementById('loveBtnWrap');
 const noBtn = document.getElementById('noBtn');
@@ -483,6 +499,7 @@ yesBtn.addEventListener('click', ()=>{
   document.getElementById('loveAnswerMsg').textContent = "That's what I thought 😌💖 I love you more, Moto.";
 });
 
+/* CUSTOMIZE: Change the quiz questions, answers, correct answer numbers, and wrong-answer messages below. */
 /* =============== quiz =============== */
 const quiz = [
   { q:"How many times do I love you, Vanshuda?", options:["10","100","Infinite 💖"], correct:2,
@@ -548,6 +565,7 @@ function startFinalReveal(){
   });
 }
 
+/* CUSTOMIZE: Change the cake instructions and the wish result message below. */
 /* =============== cake ===============*/
 let cakeBlown = false;
 document.getElementById('cake').addEventListener('click', blowCake);
@@ -565,6 +583,7 @@ setTimeout(()=>{
   }
 }, 10000);
 
+/* CUSTOMIZE: Change the birthday fortune messages below. */
 /* =============== fortune teller =============== */
 const fortunes = [
   "This year, you will finally win an argument with the WiFi router.",
@@ -581,6 +600,7 @@ function tellFortune(){
   setTimeout(()=>{ box.textContent = "🔮 " + fortunes[Math.floor(Math.random()*fortunes.length)]; box.style.opacity = 1; }, 150);
 }
 
+/* CUSTOMIZE: Change the love meter labels below. */
 /* =============== love meter =============== */
 const loveEmojis = ['😐','🙂','😄','😍','🥰','💘'];
 const loveLabels = [
@@ -606,6 +626,7 @@ function measureLove(){
   }, 90);
 }
 
+/* CUSTOMIZE: Change the compliment messages below. */
 /* =============== compliment generator =============== */
 const combos = [
   "You're clearly the most attractive person in every room, Vanshuda. I checked. Multiple times.",
@@ -620,6 +641,7 @@ function nextCombo(){
   setTimeout(()=>{ box.textContent = combos[Math.floor(Math.random()*combos.length)]; box.style.opacity = 1; }, 150);
 }
 
+/* CUSTOMIZE: Change the birthday dares below. */
 /* =============== wheel of cute dares =============== */
 const dares = [
   "Send me a selfie with your biggest birthday smile.",
@@ -643,6 +665,7 @@ function spinWheel(){
   }, 100);
 }
 
+/* CUSTOMIZE: Change the reasons and personal messages below. */
 /* =============== reasons list =============== */
 const reasons = [
   "I laugh at my own jokes so you don't have to.",
@@ -661,6 +684,7 @@ function renderReasons(){
   });
 }
 
+/* CUSTOMIZE: Change the final letter and signature in the HTML above. */
 /* =============== letter reveal =============== */
 document.getElementById('letterBtn').addEventListener('click', ()=>{
   document.getElementById('letter').style.display = 'block';
