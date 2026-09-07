@@ -67,12 +67,13 @@
   @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
   .secret{max-width:420px;margin:12px auto 0;background:#fff0f4;border-radius:16px;padding:14px 18px;font-family:'Dancing Script',cursive;font-size:20px;color:#b3245c;display:none;}
 
-  /* love question dodge game */
-  .loveBtnWrap{position:relative;height:150px;max-width:400px;margin:14px auto 0;}
-  .option{background:var(--pink);color:#fff;padding:12px 22px;margin:8px;border:none;border-radius:24px;cursor:pointer;font-size:15px;font-weight:700;transition:transform .2s ease, background .2s ease;}
-  .option:hover{background:var(--rose);}
+  /* love question dodge game — starts aligned next to Yes, same colour */
+  .loveBtnWrap{position:relative;min-height:150px;max-width:400px;margin:14px auto 0;
+    display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .option{background:linear-gradient(45deg,var(--pink),var(--rose));color:#fff;padding:12px 22px;border:none;border-radius:24px;cursor:pointer;font-size:15px;font-weight:700;transition:transform .2s ease;}
+  .option:hover{transform:translateY(-2px);}
   #yesBtn{position:relative;z-index:2;}
-  #noBtn{position:absolute;top:0;left:60%;transition:left .2s ease, top .2s ease;z-index:1;background:#9b8790;}
+  #noBtn{z-index:1;transition:left .2s ease, top .2s ease;}
   #loveAnswerMsg{margin-top:12px;font-weight:700;color:#b3245c;min-height:24px;}
   #dodgeCounter{font-size:12px;opacity:.65;margin-top:6px;}
 
@@ -110,6 +111,13 @@
 
   .toast{position:fixed;left:50%;bottom:86px;transform:translate(-50%,20px);background:#4a2540;color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:opacity .3s ease, transform .3s ease;z-index:50;pointer-events:none;}
   .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  #musicToggle{
+    position:fixed;top:14px;right:14px;z-index:40;
+    background:rgba(255,255,255,.9);border:none;border-radius:50%;
+    width:46px;height:46px;font-size:20px;cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,.2);
+  }
 </style>
 </head>
 <body>
@@ -117,10 +125,17 @@
 <canvas id="confettiCanvas"></canvas>
 <div class="balloons" id="balloons"></div>
 
+<!-- CUSTOMIZE: Background song. To change it for a different birthday, either
+     (a) drop an mp3 named song.mp3 next to this HTML file — it'll be picked up automatically, or
+     (b) paste a direct link to an mp3 file into SONG_URL near the top of the <script> below.
+     No other code needs to change. -->
+<audio id="bgMusic" loop></audio>
+<button id="musicToggle" title="Play/pause song">🔇</button>
+
 <!-- ===== INTRO SPLASH ===== -->
 <div id="intro">
   <!-- CUSTOMIZE: Change the recipient's name and opening message. -->
-  <h1>Uh oh, Vanshuda... it's YOUR day. 🚨🎂</h1>
+  <h1>Uh oh, Vanshuda... aaj toh ekdum tumhara din hai! 🚨🎂</h1>
   <!-- CUSTOMIZE: Change the rotating introduction messages in introLines below. -->
   <p id="typewriter"></p>
   <button class="btn" onclick="startShow()">Open Your Surprise 🎁</button>
@@ -134,7 +149,7 @@
   <div class="slide" id="slide0">
     <!-- CUSTOMIZE: Change the recipient's name, nickname, greeting, and heart hint. -->
     <h1 class="title">🎂 Happy Birthday, Vanshuda 🎂</h1>
-    <p class="subtitle">My Moto, my favorite person, my favorite chaos. Today the whole internet celebrates you (well, this one page — but I mean it a lot). 💕</p>
+    <p class="subtitle">My Moto, my favorite person, my favorite chaos. Today the whole internet celebrates you (well, this one page — but dil se, I mean it a lot). 💕</p>
     <div class="heart" id="heartBtn">❤️</div>
     <p style="font-size:12px;opacity:.7;margin-top:4px;">(tap the heart, Moto)</p>
     <div class="secret" id="secretMsg">"Every heartbeat of mine has your name on it." 💌</div>
@@ -145,7 +160,7 @@
     <div class="card">
       <!-- CUSTOMIZE: Change this question and the messages shown after each answer. -->
       <h2>One very important question 🤔</h2>
-      <p>Do you really love me?</p>
+      <p>Sach sach batao, yaar — do you really love me?</p>
       <div class="loveBtnWrap" id="loveBtnWrap">
         <button class="option" id="yesBtn">Yes 💖</button>
         <button class="option" id="noBtn">No</button>
@@ -173,7 +188,8 @@
       <!-- CUSTOMIZE: Change the cake instructions and wish message in the cake section below. -->
       <h2>Make a Wish 🕯️</h2>
       <div class="cake-wrap" id="cake">🎂<span class="flame" id="flame">🔥</span></div>
-      <p id="cakeText" style="font-size:.92rem;color:#7a3b52;">Tap the cake before it blows itself out in 10 seconds.</p>
+      <button class="btn" id="blowBtn" style="margin-top:10px;">🕯️ Blow the Candle</button>
+      <p id="cakeText" style="font-size:.92rem;color:#7a3b52;margin-top:10px;">Tap the cake or hit the button, yaar — warna candle 10 second mein khud hi bujh jaayegi.</p>
     </div>
   </div>
 
@@ -251,7 +267,7 @@ You are, without a doubt, my favorite person to annoy, laugh with, and build sil
 
 So — happy birthday, Moto. Here's to your laugh, your chaos, your weirdly specific opinions about everything, and every year we get to add to "us."
 
-I love you. Go be amazing today (as usual).</div>
+I love you, dil se. Go be amazing today (as usual).</div>
       <span class="signature" id="signatureLine" style="display:none;">— Yours, always causing this much chaos 💕</span>
     </div>
   </div>
@@ -282,6 +298,35 @@ I love you. Go be amazing today (as usual).</div>
 /* CUSTOMIZE: Change the recipient's name and nickname here. */
 const PARTNER_NAME = "Vanshuda";
 const PET_NAME = "Moto";
+
+/* CUSTOMIZE: Change the background song here any time — for a new birthday,
+   just swap this one line. Point it at any direct mp3/ogg link, or a local
+   filename (e.g. "song.mp3") sitting in the same folder as this HTML file. */
+const SONG_URL = "https://cdn.pixabay.com/download/audio/2023/03/01/audio_7f1b6e9b8f.mp3";
+
+/* =============== dynamic background music =============== */
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+let musicPlaying = false;
+if(SONG_URL){ bgMusic.src = SONG_URL; }
+function playMusic(){
+  if(!SONG_URL) return;
+  bgMusic.play().then(()=>{
+    musicPlaying = true;
+    musicToggle.textContent = '🎵';
+  }).catch(()=>{ /* browser blocked autoplay — she can still tap the button */ });
+}
+function toggleMusic(){
+  if(!SONG_URL) return;
+  if(musicPlaying){
+    bgMusic.pause();
+    musicPlaying = false;
+    musicToggle.textContent = '🔇';
+  } else {
+    playMusic();
+  }
+}
+musicToggle.addEventListener('click', toggleMusic);
 
 /* =============== toast helper =============== */
 const toastEl = document.getElementById('toast');
@@ -404,6 +449,7 @@ function startShow(){
   renderReasons();
   renderQuestion();
   goToSlide(0);
+  playMusic(); // this click counts as user interaction, so autoplay is allowed here
 }
 
 /* =============== SLIDE NAVIGATION =============== */
@@ -424,14 +470,11 @@ function goToSlide(i){
 
   // per-slide setup that needs the slide to be visible first
   if(slides[currentSlide].id === 'slide1'){
-    moveNoButton();
+    resetLoveButtons();
   }
 }
 backBtn.addEventListener('click', ()=> goToSlide(currentSlide - 1));
 nextBtn.addEventListener('click', ()=> goToSlide(currentSlide + 1));
-window.addEventListener('resize', ()=>{
-  if(slides[currentSlide] && slides[currentSlide].id === 'slide1') moveNoButton();
-});
 
 /* =============== heart secret =============== */
 const heartBtn = document.getElementById('heartBtn');
@@ -445,19 +488,22 @@ heartBtn.addEventListener('click', ()=>{
 });
 
 /* CUSTOMIZE: Change the love question, dodge messages, and yes-answer message below. */
-/* =============== "Do you really love me?" — No always dodges =============== */
+/* =============== "Do you really love me?" =============== */
+/* No starts aligned right next to Yes, same colour. It only starts dodging the moment
+   she actually tries to hover/tap it — not before. */
 const loveWrap = document.getElementById('loveBtnWrap');
 const noBtn = document.getElementById('noBtn');
 const yesBtn = document.getElementById('yesBtn');
 let dodgeCount = 0;
+let dodgeActive = false;
 let lastDodgeLineIndex = -1;
 const dodgeLines = [
   "Nope! Wrong button 😜",
-  "Nice try, that one's not real 😏",
+  "Arre nahi yaar, that one's not real 😏",
   "This button only exists to be chased.",
   "Almost! ...not really.",
   "Physically impossible to click, sorry.",
-  "Sorry, 'No' doesn't live here anymore.",
+  "Bas kar de, 'No' yahan available hi nahi hai 😄",
   "Error 404: 'No' not found.",
   "The button says no to being clicked. Ironic.",
   "Keep trying, I find it entertaining.",
@@ -469,8 +515,28 @@ function pickDodgeLine(){
   lastDodgeLineIndex = idx;
   return dodgeLines[idx];
 }
+function resetLoveButtons(){
+  // called every time slide1 becomes active — puts No back in its normal, aligned spot
+  dodgeActive = false;
+  dodgeCount = 0;
+  noBtn.style.position = '';
+  noBtn.style.left = '';
+  noBtn.style.top = '';
+  yesBtn.style.transform = '';
+  document.getElementById('loveAnswerMsg').textContent = '';
+  document.getElementById('dodgeCounter').textContent = '';
+}
+function activateDodgeIfNeeded(){
+  if(dodgeActive) return;
+  dodgeActive = true;
+  // seed the absolute position at wherever the button currently sits, so it doesn't jump
+  const wrapRect = loveWrap.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = (btnRect.left - wrapRect.left) + 'px';
+  noBtn.style.top = (btnRect.top - wrapRect.top) + 'px';
+}
 function moveNoButton(){
-  // guard against measuring a hidden/zero-size container
   const wrapW = loveWrap.clientWidth || 300;
   const wrapH = loveWrap.clientHeight || 150;
   const btnW = noBtn.offsetWidth || 70;
@@ -482,6 +548,7 @@ function moveNoButton(){
 }
 function dodge(e){
   e.preventDefault();
+  activateDodgeIfNeeded();
   dodgeCount++;
   moveNoButton();
   showToast(pickDodgeLine());
@@ -496,13 +563,13 @@ noBtn.addEventListener('touchstart', dodge, {passive:false});
 yesBtn.addEventListener('click', ()=>{
   const rect = yesBtn.getBoundingClientRect();
   spawnConfetti(70, rect.left+rect.width/2, rect.top+rect.height/2);
-  document.getElementById('loveAnswerMsg').textContent = "That's what I thought 😌💖 I love you more, Moto.";
+  document.getElementById('loveAnswerMsg').textContent = "Yehi sunna tha 😌💖 I love you more, Moto.";
 });
 
 /* CUSTOMIZE: Change the quiz questions, answers, correct answer numbers, and wrong-answer messages below. */
 /* =============== quiz =============== */
 const quiz = [
-  { q:"How many times do I love you, Vanshuda?", options:["10","100","Infinite 💖"], correct:2,
+  { q:"How many times do I love you, Vanshuda? (sach mein sochna)", options:["10","100","Infinite 💖"], correct:2,
     wrong:["Nice try — but baby, go higher 😜","Closer... but no 😏"] },
   { q:"What's my favorite sound in the world?", options:["Your laugh 😄","My alarm clock","Traffic"], correct:0,
     wrong:["Ha! Definitely not that.","Absolutely not — guess again."] },
@@ -569,6 +636,7 @@ function startFinalReveal(){
 /* =============== cake ===============*/
 let cakeBlown = false;
 document.getElementById('cake').addEventListener('click', blowCake);
+document.getElementById('blowBtn').addEventListener('click', blowCake);
 function blowCake(){
   if(cakeBlown) return;
   cakeBlown = true;
@@ -592,7 +660,8 @@ const fortunes = [
   "Someone who loves you very much will annoy you today. That's basically me.",
   "This year brings good luck, minor chaos, and at least one excellent meal.",
   "The stars say you'll get exactly the birthday cake flavor you wanted. No compromises.",
-  "Someone spent way too long building you a slightly ridiculous birthday website. Cherish them."
+  "Someone spent way too long building you a slightly ridiculous birthday website. Cherish them.",
+  "Is saal, WiFi router se ladai jeetne wali ho — pakka."
 ];
 function tellFortune(){
   const box = document.getElementById('fortune-box');
@@ -633,7 +702,8 @@ const combos = [
   "You have the humor of a comedian and somehow make even bad days feel like inside jokes.",
   "You're smart, funny, and impossibly easy to fall for. Iconic, honestly.",
   "You light up every room you walk into — you probably don't even realize it.",
-  "You're a 10/10 in every category that matters, and I'm not taking questions."
+  "You're a 10/10 in every category that matters, and I'm not taking questions.",
+  "Ekdum sachi baat, Vanshuda — tumhare jaisa koi nahi hai."
 ];
 function nextCombo(){
   const box = document.getElementById('combo-box');
@@ -649,7 +719,8 @@ const dares = [
   "Tell me your favorite memory of us so far.",
   "Do a little victory dance. No judges. Only love.",
   "Text me the most dramatic 'thank you' you can write.",
-  "Pick tonight's dinner — no arguments from me."
+  "Pick tonight's dinner — no arguments from me.",
+  "Bolo 'main birthday queen hoon' zor se, abhi ke abhi 👑."
 ];
 function spinWheel(){
   const el = document.getElementById('wheel-result');
@@ -672,7 +743,8 @@ const reasons = [
   "You're the only person who tolerates my late-night texts about nothing.",
   "You make bad days feel like inside jokes we'll laugh about later.",
   "You steal my food and somehow I still find it charming.",
-  "You're weird, wonderful, and 100% my favorite person on Earth."
+  "You're weird, wonderful, and 100% my favorite person on Earth.",
+  "Tum ho toh sab kuch thoda zyada mast lagta hai, Moto."
 ];
 function renderReasons(){
   const ul = document.getElementById('reasonsList');
