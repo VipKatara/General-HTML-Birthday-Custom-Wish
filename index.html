@@ -3,38 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Happy Birthday Moto❤️</title>
+<title>Happy Birthday, Vanshuda! 🎂❤️</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-<!-- The CSS below controls the colors, layout, animations, and buttons. -->
 <style>
-  :root{
-    --pink:#ff3366;
-    --rose:#ff6b9d;
-    --gold:#ffd166;
-  }
+  :root{ --pink:#ff3366; --rose:#ff6b9d; --gold:#ffd166; }
   *{box-sizing:border-box;}
   html,body{
-    margin:0;padding:0;min-height:100%;
-    font-family:'Poppins',sans-serif;
-    text-align:center;
-    overflow-x:hidden;
+    margin:0;padding:0;height:100%;
+    font-family:'Poppins',sans-serif;text-align:center;overflow:hidden;
     background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
-    background-size:400% 400%;
-    animation:gradientShift 16s ease infinite;
+    background-size:400% 400%;animation:gradientShift 16s ease infinite;
     color:#4a2540;
   }
-  @keyframes gradientShift{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 
-  #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;}
+  #confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:20;}
   .balloons{position:fixed;bottom:0;left:0;width:100%;height:100%;pointer-events:none;z-index:4;overflow:hidden;}
   .balloon{
     position:absolute;bottom:-140px;width:56px;height:70px;
-    border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
-    pointer-events:all;cursor:pointer;
+    border-radius:50% 50% 50% 50%/60% 60% 40% 40%;pointer-events:all;cursor:pointer;
     animation-name:floatUp;animation-timing-function:linear;animation-iteration-count:infinite;
     box-shadow:inset -6px -6px 10px rgba(0,0,0,.15);
   }
@@ -44,138 +31,254 @@
     50%{transform:translateY(-60vh) translateX(24px) rotate(5deg);}
     100%{transform:translateY(-130vh) translateX(-18px) rotate(-5deg);}
   }
+  .emoji-rain{position:fixed;top:-50px;font-size:22px;animation:fall linear forwards;pointer-events:none;z-index:3;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2;}}
 
-  .wrap{position:relative;z-index:10;max-width:760px;margin:0 auto;padding:50px 20px 90px;}
+  /* ---------- intro splash ---------- */
+  #intro{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;position:relative;z-index:10;}
+  #intro h1{font-size:clamp(1.7rem,6vw,2.8rem);color:var(--pink);text-shadow:2px 2px 0 #fff5f7;margin-bottom:16px;}
+  #intro p{font-size:1.1rem;margin-bottom:26px;color:#7a3b52;min-height:30px;}
 
-  h1{
-    font-size:clamp(30px,6vw,54px);
-    color:var(--pink);
-    margin:10px 0 6px;
-    animation:bounce 2s infinite;
-    text-shadow:0 2px 10px rgba(255,255,255,.5);
+  .btn{
+    background:linear-gradient(45deg,var(--pink),var(--rose));color:#fff;border:none;
+    padding:14px 30px;font-size:1rem;border-radius:50px;cursor:pointer;
+    box-shadow:0 8px 20px rgba(214,51,108,.4);transition:transform .2s ease;
+    font-weight:700;margin:6px;
   }
-  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+  .btn:hover{transform:translateY(-3px) scale(1.05);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
 
-  .subtitle{font-size:clamp(15px,2.4vw,19px);margin-bottom:20px;opacity:.9;}
+  /* ---------- slide deck (one screen at a time, no scrollbar) ---------- */
+  #deckOuter{display:none;height:100vh;position:relative;z-index:10;display:flex;flex-direction:column;}
+  #slideDeck{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden;}
+  .slide{display:none;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;animation:fadeIn .35s ease;}
+  .slide.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-  .heart{font-size:4em;color:#ff3366;animation:pulse 1.1s infinite;cursor:pointer;user-select:none;}
+  h1.title{font-size:clamp(24px,6vw,42px);color:var(--pink);margin:4px 0;animation:bounce 2s infinite;text-shadow:0 2px 10px rgba(255,255,255,.5);}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  .subtitle{font-size:clamp(14px,2.2vw,17px);opacity:.9;margin-bottom:8px;}
+
+  .card{background:rgba(255,255,255,.92);border-radius:22px;padding:24px 20px;box-shadow:0 12px 32px rgba(0,0,0,.16);}
+  .card h2{margin-top:0;font-size:1.25rem;color:#4a2540;}
+
+  .heart{font-size:3.6em;color:var(--pink);animation:pulse 1.1s infinite;cursor:pointer;user-select:none;}
   @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
-  .heart-hint{font-size:13px;opacity:.75;margin-top:4px;margin-bottom:20px;}
+  .secret{max-width:420px;margin:12px auto 0;background:#fff0f4;border-radius:16px;padding:14px 18px;font-family:'Dancing Script',cursive;font-size:20px;color:#b3245c;display:none;}
 
-  /* secret message unlocked by clicking heart */
-  .secret{
-    max-width:480px;margin:14px auto 30px;background:rgba(255,255,255,.85);
-    border-radius:16px;padding:16px 20px;font-family:'Dancing Script',cursive;
-    font-size:22px;color:#b3245c;box-shadow:0 10px 26px rgba(0,0,0,.15);
-    display:none;
-  }
+  /* love question dodge game */
+  .loveBtnWrap{position:relative;height:150px;max-width:400px;margin:14px auto 0;}
+  .option{background:var(--pink);color:#fff;padding:12px 22px;margin:8px;border:none;border-radius:24px;cursor:pointer;font-size:15px;font-weight:700;transition:transform .2s ease, background .2s ease;}
+  .option:hover{background:var(--rose);}
+  #yesBtn{position:relative;z-index:2;}
+  #noBtn{position:absolute;top:0;left:60%;transition:left .2s ease, top .2s ease;z-index:1;background:#9b8790;}
+  #loveAnswerMsg{margin-top:12px;font-weight:700;color:#b3245c;min-height:24px;}
+  #dodgeCounter{font-size:12px;opacity:.65;margin-top:6px;}
 
-  /* quiz */
-  .quizStage{
-    background:rgba(255,255,255,.88);
-    border-radius:20px;padding:26px 24px;margin:26px auto;max-width:560px;
-    box-shadow:0 14px 34px rgba(0,0,0,.18);
-  }
-  .quizStage h3{margin-top:0;font-size:20px;color:#4a2540;}
-  .progress{font-size:12px;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-bottom:14px;}
-  .option{
-    background:var(--pink);color:#fff;padding:12px 20px;margin:8px;border:none;
-    border-radius:24px;cursor:pointer;font-size:15px;font-weight:600;
-    transition:.2s ease;display:inline-block;
-  }
-  .option:hover{background:var(--rose);transform:translateY(-2px);}
-  .feedback{min-height:24px;margin-top:10px;font-weight:600;color:#b3245c;}
+  .progress{font-size:12px;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-bottom:10px;}
+  .feedback{min-height:22px;margin-top:8px;font-weight:600;color:#b3245c;}
 
-  /* surprise / final reveal */
-  #finalArea{display:none;margin-top:10px;}
-  .revealMsg{
-    max-width:560px;margin:16px auto;background:rgba(255,255,255,.9);
-    border-radius:18px;padding:22px 24px;font-size:18px;line-height:1.6;
-    box-shadow:0 14px 32px rgba(0,0,0,.18);opacity:0;transform:translateY(16px);
-    transition:opacity .8s ease, transform .8s ease;
-  }
+  .cake-wrap{font-size:4.6rem;position:relative;margin:6px 0;user-select:none;cursor:pointer;}
+  .flame{display:inline-block;transition:opacity .4s ease, transform .4s ease;}
+  .flame.blown{opacity:0;transform:translateY(-10px) scale(.5);}
+
+  #fortune-box,#combo-box{min-height:56px;background:#fff0f4;border:2px dashed #ff8fab;border-radius:16px;padding:14px;margin-top:8px;font-size:1rem;transition:opacity .2s ease;}
+  #love-result{font-size:2rem;margin:6px 0;min-height:44px;}
+  #love-label{font-size:.95rem;color:#7a3b52;}
+  #wheel-result{font-size:1.05rem;margin-top:10px;min-height:28px;font-weight:700;color:var(--pink);}
+
+  .reasons{text-align:left;list-style:none;padding:0;}
+  .reasons li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed #ffd6e0;font-size:.98rem;}
+  .reasons li:before{content:"💗";position:absolute;left:0;}
+  .reasons li:last-child{border-bottom:none;}
+
+  .revealMsg{max-width:100%;margin:10px 0;background:#fff0f4;border-radius:16px;padding:16px 18px;font-size:.98rem;line-height:1.5;opacity:0;transform:translateY(12px);transition:opacity .7s ease, transform .7s ease;}
   .revealMsg.show{opacity:1;transform:translateY(0);}
+  #letter{font-size:1rem;line-height:1.7;text-align:left;white-space:pre-wrap;display:none;margin-top:12px;}
+  .signature{display:block;margin-top:14px;font-style:italic;text-align:right;color:var(--pink);font-size:1.1rem;}
+  #letterBtn{display:inline-block;}
 
-  #loveLetterBox{
-    display:none;margin-top:18px;background:linear-gradient(135deg,#fff,#ffe3ec);
-    border-radius:20px;padding:28px;max-width:600px;margin-left:auto;margin-right:auto;
-    font-family:'Dancing Script',cursive;font-size:26px;color:#b3245c;line-height:1.5;
-    box-shadow:0 18px 40px rgba(0,0,0,.22);
+  /* ---------- bottom nav ---------- */
+  #navBar{display:flex;align-items:center;justify-content:center;gap:18px;padding:14px;position:relative;z-index:10;}
+  #navBar button{
+    background:rgba(255,255,255,.9);color:#4a2540;border:none;padding:10px 20px;
+    border-radius:24px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.15);
   }
-  button.fun{
-    font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;
-    padding:12px 24px;border:none;border-radius:30px;cursor:pointer;margin-top:16px;
-    background:linear-gradient(90deg,var(--pink),#c94b8f);color:#fff;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);transition:transform .15s ease;
-  }
-  button.fun:hover{transform:translateY(-2px) scale(1.03);}
+  #navBar button:disabled{opacity:.35;cursor:not-allowed;}
+  #slideCounter{font-size:13px;color:#4a2540;background:rgba(255,255,255,.7);padding:6px 14px;border-radius:16px;}
 
-  .toast{
-    position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);
-    background:#4a2540;color:#fff;padding:12px 22px;border-radius:30px;font-size:14px;
-    opacity:0;transition:opacity .3s ease, transform .3s ease;z-index:50;pointer-events:none;
-  }
+  .toast{position:fixed;left:50%;bottom:86px;transform:translate(-50%,20px);background:#4a2540;color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;opacity:0;transition:opacity .3s ease, transform .3s ease;z-index:50;pointer-events:none;}
   .toast.show{opacity:1;transform:translate(-50%,0);}
-
-  footer{position:relative;z-index:10;font-size:13px;opacity:.8;padding-bottom:20px;}
 </style>
 </head>
 <body>
 
-<!-- These two layers create the animated background decorations. -->
 <canvas id="confettiCanvas"></canvas>
 <div class="balloons" id="balloons"></div>
 
-<!-- Main birthday message and interactive content. -->
-<div class="wrap">
-  <h1 id="titleText">🎂 Happy Birthday, My Love 🎂</h1>
-  <p class="subtitle">You make my world brighter, funnier, and full of love Vanshuda 💕</p>
+<!-- ===== INTRO SPLASH ===== -->
+<div id="intro">
+  <h1>Uh oh, Vanshuda... it's YOUR day. 🚨🎂</h1>
+  <p id="typewriter"></p>
+  <button class="btn" onclick="startShow()">Open Your Surprise 🎁</button>
+</div>
 
-  <div class="heart" id="heartBtn">❤️</div>
-  <p class="heart-hint">(tap the heart)</p>
-  <div class="secret" id="secretMsg">"Every heartbeat of mine has your name on it." 💌</div>
+<!-- ===== SLIDE DECK ===== -->
+<div id="deckOuter">
+<div id="slideDeck">
 
-  <!-- Birthday quiz: JavaScript adds the questions and answer buttons here. -->
-  <div class="quizStage" id="quizStage">
-    <div class="progress" id="quizProgress">Question 1 of 3</div>
-    <h3 id="quizQuestion">How many times do I love you?</h3>
-    <div id="quizOptions"></div>
-    <div class="feedback" id="quizFeedback"></div>
+  <!-- Slide 0: Greeting -->
+  <div class="slide" id="slide0">
+    <h1 class="title">🎂 Happy Birthday, Vanshuda 🎂</h1>
+    <p class="subtitle">My Moto, my favorite person, my favorite chaos. Today the whole internet celebrates you (well, this one page — but I mean it a lot). 💕</p>
+    <div class="heart" id="heartBtn">❤️</div>
+    <p style="font-size:12px;opacity:.7;margin-top:4px;">(tap the heart, Moto)</p>
+    <div class="secret" id="secretMsg">"Every heartbeat of mine has your name on it." 💌</div>
   </div>
 
-  <!-- These messages appear one by one after all quiz answers are correct. -->
-  <div id="finalArea">
-    <div class="revealMsg" id="reveal1">🎉 You got them all right — of course you did, you're brilliant.</div>
-    <div class="revealMsg" id="reveal2">🎈 Somewhere between the balloons and the bad jokes, I fell for you even more.</div>
-    <div class="revealMsg" id="reveal3">💖 One more surprise is on its way...</div>
-    <div id="loveLetterBox">
-      Happy Birthday, my love. <br>
-      You are my favorite person, my favorite laugh, and my favorite forever. <br>
-      Here's to another year of us. 💕
+  <!-- Slide 1: Love question -->
+  <div class="slide" id="slide1">
+    <div class="card">
+      <h2>One very important question 🤔</h2>
+      <p>Do you really love me?</p>
+      <div class="loveBtnWrap" id="loveBtnWrap">
+        <button class="option" id="yesBtn">Yes 💖</button>
+        <button class="option" id="noBtn">No</button>
+      </div>
+      <div id="loveAnswerMsg"></div>
+      <div id="dodgeCounter"></div>
     </div>
-    <button class="fun" id="letterBtn" style="display:none;">💌 Open my letter to you</button>
   </div>
+
+  <!-- Slide 2: Quiz -->
+  <div class="slide" id="slide2">
+    <div class="card">
+      <h2>Quick Quiz About Us 💭</h2>
+      <div class="progress" id="quizProgress">Question 1 of 4</div>
+      <h3 id="quizQuestion" style="margin-top:0;"></h3>
+      <div id="quizOptions"></div>
+      <div class="feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Cake -->
+  <div class="slide" id="slide3">
+    <div class="card">
+      <h2>Make a Wish 🕯️</h2>
+      <div class="cake-wrap" id="cake">🎂<span class="flame" id="flame">🔥</span></div>
+      <p id="cakeText" style="font-size:.92rem;color:#7a3b52;">Tap the cake before it blows itself out in 10 seconds.</p>
+    </div>
+  </div>
+
+  <!-- Slide 4: Fortune -->
+  <div class="slide" id="slide4">
+    <div class="card">
+      <h2>Birthday Fortune, Just For You 🔮</h2>
+      <div id="fortune-box">Your fortune will appear here...</div>
+      <button class="btn" onclick="tellFortune()" style="margin-top:12px;">Reveal My Fate</button>
+    </div>
+  </div>
+
+  <!-- Slide 5: Love meter -->
+  <div class="slide" id="slide5">
+    <div class="card">
+      <h2>Official Love Meter 💗</h2>
+      <div id="love-result">🤔</div>
+      <div id="love-label">Click to measure exactly how loved you are today</div>
+      <button class="btn" onclick="measureLove()" style="margin-top:12px;">Measure Me</button>
+    </div>
+  </div>
+
+  <!-- Slide 6: Compliments -->
+  <div class="slide" id="slide6">
+    <div class="card">
+      <h2>Compliments You Didn't Ask For 🌶️💕</h2>
+      <div id="combo-box">Click for a compliment, no take-backs.</div>
+      <button class="btn" onclick="nextCombo()" style="margin-top:12px;">Hit Me</button>
+    </div>
+  </div>
+
+  <!-- Slide 7: Wheel -->
+  <div class="slide" id="slide7">
+    <div class="card">
+      <h2>Spin the Wheel of Birthday Dares 🎡</h2>
+      <p style="font-size:.92rem;color:#7a3b52;">Fully optional. Mostly adorable.</p>
+      <button class="btn" onclick="spinWheel()">Spin It</button>
+      <div id="wheel-result"></div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Reasons -->
+  <div class="slide" id="slide8">
+    <div class="card">
+      <h2>Reasons You're Stuck With Me, Moto</h2>
+      <ul class="reasons" id="reasonsList"></ul>
+    </div>
+  </div>
+
+  <!-- Slide 9: Timed reveals -->
+  <div class="slide" id="slide9">
+    <div class="card">
+      <h2>Wait for it... 💫</h2>
+      <div id="reveal1" class="revealMsg">🎉 You got them all right — of course you did, you're brilliant, Vanshuda.</div>
+      <div id="reveal2" class="revealMsg">🎈 Somewhere between the balloons and the terrible jokes, I fell for you even more.</div>
+      <div id="reveal3" class="revealMsg">💖 One more surprise is on its way...</div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Letter -->
+  <div class="slide" id="slide10">
+    <div class="card">
+      <h2>Okay, Being Serious for One Second 💌</h2>
+      <button class="btn" id="letterBtn">Open My Letter To You</button>
+      <div id="letter">Happy birthday, Vanshuda.
+
+You are, without a doubt, my favorite person to annoy, laugh with, and build silly little websites for at 1am. I built this whole ridiculous page because a text message felt way too small for how much you mean to me.
+
+So — happy birthday, Moto. Here's to your laugh, your chaos, your weirdly specific opinions about everything, and every year we get to add to "us."
+
+I love you. Go be amazing today (as usual).</div>
+      <span class="signature" id="signatureLine" style="display:none;">— Yours, always causing this much chaos 💕</span>
+    </div>
+  </div>
+
+  <!-- Slide 11: Finale -->
+  <div class="slide" id="slide11">
+    <div class="card">
+      <h2>Grand Finale 🎊</h2>
+      <p style="margin-bottom:14px;">Happy Birthday, Vanshuda. That's the whole website. Now go enjoy your day. 💕</p>
+      <button class="btn" onclick="launchConfetti(220)">Unleash Confetti 🎊</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== NAV BAR ===== -->
+<div id="navBar">
+  <button id="backBtn">◀ Back</button>
+  <span id="slideCounter">1 / 12</span>
+  <button id="nextBtn">Next ▶</button>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
-<footer>Made with ❤️ by Vipul</footer>
 
-<!-- The JavaScript below makes the heart, balloons, quiz, confetti, and letter interactive. -->
 <script>
-/* Change this name when personalizing the birthday wish. */
-const PARTNER_NAME = "My Love";
+/* =============== quick personalization =============== */
+const PARTNER_NAME = "Vanshuda";
+const PET_NAME = "Moto";
 
-/* Shows a small message at the bottom of the page. */
+/* =============== toast helper =============== */
 const toastEl = document.getElementById('toast');
 let toastTimer;
-function showToast(msg, duration=2200){
+function showToast(msg, duration=2000){
   toastEl.textContent = msg;
   toastEl.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=> toastEl.classList.remove('show'), duration);
 }
 
-/* Draws and moves the colorful confetti. */
+/* =============== confetti canvas =============== */
 const canvas = document.getElementById('confettiCanvas');
 const ctx = canvas.getContext('2d');
 function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
@@ -190,7 +293,7 @@ function spawnConfetti(n, x, y){
       y: y!==undefined ? y : -20,
       vx: x!==undefined ? (Math.random()-0.5)*9 : (Math.random()-0.5)*2,
       vy: x!==undefined ? (Math.random()-1)*9 : 1+Math.random()*2,
-      size:4+Math.random()*6, color:colors[Math.floor(Math.random()*colors.length)],
+      size:5+Math.random()*6, color:colors[Math.floor(Math.random()*colors.length)],
       rot:Math.random()*360, vrot:(Math.random()-0.5)*10, life:0
     });
   }
@@ -203,39 +306,34 @@ function loop(){
     ctx.fillStyle=p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size); ctx.restore();
   });
   particles = particles.filter(p=>p.y < canvas.height+40 && p.life<600);
-  if(Math.random()<0.1) spawnConfetti(1);
   requestAnimationFrame(loop);
 }
-spawnConfetti(50); loop();
+function launchConfetti(n){ spawnConfetti(n); }
+loop();
 
-/* Creates balloons. Clicking one pops it and shows a small message. */
+/* =============== ambient emoji rain ============== */
+const rainEmojis = ['🎈','🎉','✨','🎂','💖','🥳'];
+function spawnEmoji(){
+  const e = document.createElement('div');
+  e.className='emoji-rain';
+  e.textContent = rainEmojis[Math.floor(Math.random()*rainEmojis.length)];
+  e.style.left = Math.random()*100 + 'vw';
+  const duration = 5+Math.random()*5;
+  e.style.animationDuration = duration+'s';
+  e.style.fontSize = (16+Math.random()*16)+'px';
+  document.body.appendChild(e);
+  setTimeout(()=> e.remove(), duration*1000);
+}
+
+/* =============== balloons =============== */
 const balloonsWrap = document.getElementById('balloons');
 const balloonNotes = [
   "You're the best part of my every day 💕",
   "Warning: extremely huggable human detected 🤗",
   "My favorite notification is a text from you 💬",
   "You + Cake = perfect combo 🎂",
-  null, null, null // most balloons are just for fun, no note
+  null, null, null
 ];
-function makeBalloons(count){
-  for(let i=0;i<count;i++){
-    const b = document.createElement('div');
-    b.className='balloon';
-    b.style.left = Math.random()*94 + 'vw';
-    b.style.background = colors[i % colors.length];
-    b.style.animationDuration = (9+Math.random()*9)+'s';
-    b.style.animationDelay = (Math.random()*10)+'s';
-    const note = balloonNotes[Math.floor(Math.random()*balloonNotes.length)];
-    b.addEventListener('click', ()=>{
-      const rect = b.getBoundingClientRect();
-      spawnConfetti(40, rect.left+rect.width/2, rect.top+rect.height/2);
-      showToast(note ? "🎈 " + note : "Pop! 🎈");
-      b.remove();
-      setTimeout(()=> balloonsWrap.appendChild(makeOneBalloon()), 4000);
-    });
-    balloonsWrap.appendChild(b);
-  }
-}
 function makeOneBalloon(){
   const b = document.createElement('div');
   b.className='balloon';
@@ -252,9 +350,75 @@ function makeOneBalloon(){
   });
   return b;
 }
-makeBalloons(10);
+for(let i=0;i<8;i++){
+  const b = makeOneBalloon();
+  b.style.animationDelay = (Math.random()*10)+'s';
+  balloonsWrap.appendChild(b);
+}
 
-/* Clicking the heart shows or hides the secret romantic message. */
+/* =============== intro typewriter =============== */
+const introLines = [
+  "I made you a website, Vanshuda. Yes, a whole website. For a birthday.",
+  "Please lower your expectations before proceeding.",
+  "Okay actually raise them a little. It's pretty good."
+];
+let twLine=0, twChar=0;
+function typeLine(){
+  const el = document.getElementById('typewriter');
+  if(twChar < introLines[twLine].length){
+    el.textContent += introLines[twLine][twChar];
+    twChar++;
+    setTimeout(typeLine, 32);
+  } else {
+    setTimeout(()=>{
+      twLine = (twLine+1) % introLines.length;
+      twChar = 0;
+      el.textContent = '';
+      typeLine();
+    }, 1300);
+  }
+}
+typeLine();
+
+/* =============== intro -> slide deck =============== */
+function startShow(){
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('deckOuter').style.display = 'flex';
+  spawnConfetti(90);
+  setInterval(spawnEmoji, 550);
+  renderReasons();
+  renderQuestion();
+  goToSlide(0);
+}
+
+/* =============== SLIDE NAVIGATION =============== */
+const slides = Array.from(document.querySelectorAll('.slide'));
+let currentSlide = 0;
+const backBtn = document.getElementById('backBtn');
+const nextBtn = document.getElementById('nextBtn');
+const slideCounter = document.getElementById('slideCounter');
+
+function goToSlide(i){
+  if(i < 0 || i >= slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  currentSlide = i;
+  slides[currentSlide].classList.add('active');
+  slideCounter.textContent = (currentSlide+1) + ' / ' + slides.length;
+  backBtn.disabled = currentSlide === 0;
+  nextBtn.disabled = currentSlide === slides.length - 1;
+
+  // per-slide setup that needs the slide to be visible first
+  if(slides[currentSlide].id === 'slide1'){
+    moveNoButton();
+  }
+}
+backBtn.addEventListener('click', ()=> goToSlide(currentSlide - 1));
+nextBtn.addEventListener('click', ()=> goToSlide(currentSlide + 1));
+window.addEventListener('resize', ()=>{
+  if(slides[currentSlide] && slides[currentSlide].id === 'slide1') moveNoButton();
+});
+
+/* =============== heart secret =============== */
 const heartBtn = document.getElementById('heartBtn');
 const secretMsg = document.getElementById('secretMsg');
 let secretShown = false;
@@ -265,41 +429,83 @@ heartBtn.addEventListener('click', ()=>{
   spawnConfetti(25, rect.left+rect.width/2, rect.top+rect.height/2);
 });
 
-/* The quiz questions, possible answers, and correct answer numbers. */
+/* =============== "Do you really love me?" — No always dodges =============== */
+const loveWrap = document.getElementById('loveBtnWrap');
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+let dodgeCount = 0;
+let lastDodgeLineIndex = -1;
+const dodgeLines = [
+  "Nope! Wrong button 😜",
+  "Nice try, that one's not real 😏",
+  "This button only exists to be chased.",
+  "Almost! ...not really.",
+  "Physically impossible to click, sorry.",
+  "Sorry, 'No' doesn't live here anymore.",
+  "Error 404: 'No' not found.",
+  "The button says no to being clicked. Ironic.",
+  "Keep trying, I find it entertaining.",
+  "That button has trust issues. It runs from everyone."
+];
+function pickDodgeLine(){
+  let idx;
+  do { idx = Math.floor(Math.random()*dodgeLines.length); } while(idx === lastDodgeLineIndex && dodgeLines.length > 1);
+  lastDodgeLineIndex = idx;
+  return dodgeLines[idx];
+}
+function moveNoButton(){
+  // guard against measuring a hidden/zero-size container
+  const wrapW = loveWrap.clientWidth || 300;
+  const wrapH = loveWrap.clientHeight || 150;
+  const btnW = noBtn.offsetWidth || 70;
+  const btnH = noBtn.offsetHeight || 40;
+  const maxX = Math.max(wrapW - btnW, 10);
+  const maxY = Math.max(wrapH - btnH, 10);
+  noBtn.style.left = Math.random()*maxX + 'px';
+  noBtn.style.top = Math.random()*maxY + 'px';
+}
+function dodge(e){
+  e.preventDefault();
+  dodgeCount++;
+  moveNoButton();
+  showToast(pickDodgeLine());
+  document.getElementById('dodgeCounter').textContent =
+    "Attempts to click No: " + dodgeCount + " (still 0% successful)";
+  const grow = Math.min(1 + dodgeCount*0.03, 1.4);
+  yesBtn.style.transform = 'scale(' + grow + ')';
+}
+noBtn.addEventListener('mouseenter', dodge);
+noBtn.addEventListener('click', dodge);
+noBtn.addEventListener('touchstart', dodge, {passive:false});
+yesBtn.addEventListener('click', ()=>{
+  const rect = yesBtn.getBoundingClientRect();
+  spawnConfetti(70, rect.left+rect.width/2, rect.top+rect.height/2);
+  document.getElementById('loveAnswerMsg').textContent = "That's what I thought 😌💖 I love you more, Moto.";
+});
+
+/* =============== quiz =============== */
 const quiz = [
-  {
-    q: "You know how many times do I love you?",
-    options: ["10", "100", "Infinite 💖"],
-    correct: 2,
-    wrong: ["Nice try — but baby go higher 😜", "Closer... but no 😏"]
-  },
-  {
-    q: "What's my favorite sound in the world?",
-    options: ["Your laugh 😄", "My alarm clock", "Traffic"],
-    correct: 0,
-    wrong: ["Ha! Definitely not that.", "Absolutely not — guess again."]
-  },
-  {
-    q: "My best way to spend a Weekend?",
-    options: ["A long walk, hand in hand, talking about everything with you ❤️", "My sleep", "Watching movie alone"],
-    correct: 0,
-    wrong: ["...really baby? hupp! go and try again.", "Bold choice, but no 😂"]
-  }
+  { q:"How many times do I love you, Vanshuda?", options:["10","100","Infinite 💖"], correct:2,
+    wrong:["Nice try — but baby, go higher 😜","Closer... but no 😏"] },
+  { q:"What's my favorite sound in the world?", options:["Your laugh 😄","My alarm clock","Traffic"], correct:0,
+    wrong:["Ha! Definitely not that.","Absolutely not — guess again."] },
+  { q:"Best way to spend a weekend with you?", options:["A long walk, hand in hand, talking about everything ❤️","My sleep","Watching a movie alone"], correct:0,
+    wrong:["...really, Vanshuda? Try again.","Bold choice, but no 😂"] },
+  { q:"Who is objectively the best birthday person this year?", options:["Some random celebrity","You, obviously 👑","Nobody, birthdays are cancelled"], correct:1,
+    wrong:["Wrong, try again 😅","Nope — think closer to home."] }
 ];
 let qIndex = 0;
-const quizStage = document.getElementById('quizStage');
 const quizProgress = document.getElementById('quizProgress');
 const quizQuestion = document.getElementById('quizQuestion');
 const quizOptions = document.getElementById('quizOptions');
 const quizFeedback = document.getElementById('quizFeedback');
-
 function renderQuestion(){
   const item = quiz[qIndex];
   quizProgress.textContent = `Question ${qIndex+1} of ${quiz.length}`;
   quizQuestion.textContent = item.q;
   quizOptions.innerHTML = '';
   quizFeedback.textContent = '';
-  item.options.forEach((opt, i)=>{
+  item.options.forEach((opt,i)=>{
     const btn = document.createElement('button');
     btn.className = 'option';
     btn.textContent = opt;
@@ -307,8 +513,6 @@ function renderQuestion(){
     quizOptions.appendChild(btn);
   });
 }
-
-/* Checks the selected answer and moves to the next question when correct. */
 function handleAnswer(i){
   const item = quiz[qIndex];
   if(i === item.correct){
@@ -316,39 +520,152 @@ function handleAnswer(i){
     quizFeedback.textContent = "✅ Correct!";
     setTimeout(()=>{
       qIndex++;
-      if(qIndex < quiz.length){
-        renderQuestion();
-      } else {
-        quizStage.style.display = 'none';
+      if(qIndex < quiz.length){ renderQuestion(); }
+      else{
+        quizQuestion.textContent = "You aced it, Vanshuda! 🎉";
+        quizOptions.innerHTML = '';
+        quizProgress.textContent = 'Done!';
         startFinalReveal();
       }
-    }, 900);
+    }, 800);
   } else {
     const msg = item.wrong[Math.floor(Math.random()*item.wrong.length)];
     quizFeedback.textContent = "❌ " + msg;
     showToast("Oops! Try again 😜");
   }
 }
-renderQuestion();
 
-/* Shows the final romantic messages with a short delay between each one. */
+/* =============== timed romantic reveal (slide 9) =============== */
+let revealStarted = false;
 function startFinalReveal(){
-  const finalArea = document.getElementById('finalArea');
-  finalArea.style.display = 'block';
-  const reveals = ['reveal1','reveal2','reveal3'];
-  reveals.forEach((id, idx)=>{
+  if(revealStarted) return;
+  revealStarted = true;
+  ['reveal1','reveal2','reveal3'].forEach((id, idx)=>{
     setTimeout(()=>{
       document.getElementById(id).classList.add('show');
       spawnConfetti(30);
-    }, idx * 1800);
+    }, idx*1600);
   });
-  setTimeout(()=>{
-    document.getElementById('letterBtn').style.display = 'inline-block';
-  }, reveals.length * 1800 + 400);
 }
 
+/* =============== cake ===============*/
+let cakeBlown = false;
+document.getElementById('cake').addEventListener('click', blowCake);
+function blowCake(){
+  if(cakeBlown) return;
+  cakeBlown = true;
+  document.getElementById('flame').classList.add('blown');
+  document.getElementById('cakeText').textContent = "Wish made. The universe is now legally obligated to deliver, Vanshuda. 🌟";
+  spawnConfetti(60, innerWidth/2, innerHeight*0.4);
+}
+setTimeout(()=>{
+  if(!cakeBlown){
+    document.getElementById('cakeText').textContent = "Time's up! The candle blew itself out from secondhand embarrassment.";
+    blowCake();
+  }
+}, 10000);
+
+/* =============== fortune teller =============== */
+const fortunes = [
+  "This year, you will finally win an argument with the WiFi router.",
+  "A great opportunity will come your way. You will ignore it in favor of a nap.",
+  "You will find ₹50 in an old jacket pocket. Spend it wisely (on snacks).",
+  "Someone who loves you very much will annoy you today. That's basically me.",
+  "This year brings good luck, minor chaos, and at least one excellent meal.",
+  "The stars say you'll get exactly the birthday cake flavor you wanted. No compromises.",
+  "Someone spent way too long building you a slightly ridiculous birthday website. Cherish them."
+];
+function tellFortune(){
+  const box = document.getElementById('fortune-box');
+  box.style.opacity = 0;
+  setTimeout(()=>{ box.textContent = "🔮 " + fortunes[Math.floor(Math.random()*fortunes.length)]; box.style.opacity = 1; }, 150);
+}
+
+/* =============== love meter =============== */
+const loveEmojis = ['😐','🙂','😄','😍','🥰','💘'];
+const loveLabels = [
+  "Barely loved. Suspicious. Let's recheck.",
+  "Politely adored.",
+  "Genuinely cherished.",
+  "Head-over-heels territory.",
+  "Certified soulmate status.",
+  "Off the charts. New scale required."
+];
+function measureLove(){
+  const result = document.getElementById('love-result');
+  const label = document.getElementById('love-label');
+  let i=0;
+  const spin = setInterval(()=>{
+    result.textContent = loveEmojis[i % loveEmojis.length];
+    i++;
+    if(i>12){
+      clearInterval(spin);
+      result.textContent = loveEmojis[5] + " 100%";
+      label.textContent = loveLabels[5];
+    }
+  }, 90);
+}
+
+/* =============== compliment generator =============== */
+const combos = [
+  "You're clearly the most attractive person in every room, Vanshuda. I checked. Multiple times.",
+  "You have the humor of a comedian and somehow make even bad days feel like inside jokes.",
+  "You're smart, funny, and impossibly easy to fall for. Iconic, honestly.",
+  "You light up every room you walk into — you probably don't even realize it.",
+  "You're a 10/10 in every category that matters, and I'm not taking questions."
+];
+function nextCombo(){
+  const box = document.getElementById('combo-box');
+  box.style.opacity = 0;
+  setTimeout(()=>{ box.textContent = combos[Math.floor(Math.random()*combos.length)]; box.style.opacity = 1; }, 150);
+}
+
+/* =============== wheel of cute dares =============== */
+const dares = [
+  "Send me a selfie with your biggest birthday smile.",
+  "Say 'I'm a birthday icon' out loud, right now.",
+  "Tell me your favorite memory of us so far.",
+  "Do a little victory dance. No judges. Only love.",
+  "Text me the most dramatic 'thank you' you can write.",
+  "Pick tonight's dinner — no arguments from me."
+];
+function spinWheel(){
+  const el = document.getElementById('wheel-result');
+  el.textContent = '';
+  let i=0;
+  const spin = setInterval(()=>{
+    el.textContent = "🎡 " + dares[i % dares.length];
+    i++;
+    if(i>14){
+      clearInterval(spin);
+      el.textContent = "🎯 Your dare: " + dares[Math.floor(Math.random()*dares.length)];
+    }
+  }, 100);
+}
+
+/* =============== reasons list =============== */
+const reasons = [
+  "I laugh at my own jokes so you don't have to.",
+  "You're the only person who tolerates my late-night texts about nothing.",
+  "You make bad days feel like inside jokes we'll laugh about later.",
+  "You steal my food and somehow I still find it charming.",
+  "You're weird, wonderful, and 100% my favorite person on Earth."
+];
+function renderReasons(){
+  const ul = document.getElementById('reasonsList');
+  ul.innerHTML = '';
+  reasons.forEach(r=>{
+    const li = document.createElement('li');
+    li.textContent = r;
+    ul.appendChild(li);
+  });
+}
+
+/* =============== letter reveal =============== */
 document.getElementById('letterBtn').addEventListener('click', ()=>{
-  document.getElementById('loveLetterBox').style.display = 'block';
+  document.getElementById('letter').style.display = 'block';
+  document.getElementById('signatureLine').style.display = 'block';
+  document.getElementById('letterBtn').style.display = 'none';
   spawnConfetti(100, innerWidth/2, innerHeight/2);
   showToast("💖 Surprise unlocked!");
 });
